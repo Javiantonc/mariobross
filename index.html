@@ -2391,13 +2391,16 @@
         this.balloonMeshes.forEach(b => b.visible = active);
       }
 
-      setPosition(pos, heading) {
+      setPosition(pos, heading, progress = 0) {
         this.pos.copy(pos);
         this.heading = heading;
+        this.trackProgress = progress;
         this.mesh.position.copy(pos);
         this.mesh.rotation.y = heading;
         this.speed = 0;
         this.vel.set(0, 0, 0);
+        this.verticalVel = 0;
+        this.isGrounded = true;
       }
 
       update(dt, input, karts, ccMultiplier = 1.0, projectileManager = null) {
@@ -2561,19 +2564,42 @@
         this.vel.set(Math.sin(this.heading), 0, Math.cos(this.heading)).multiplyScalar(this.speed);
         this.pos.addScaledVector(this.vel, dt);
 
-        // Vertical physics (Jumps & Gravity)
+        // Track Progress Calculation first so we know local height & slope
+        if (this.spline) {
+          this.updateTrackProgress();
+        }
+
+        // Surface elevation and slope adherence
+        let roadHeight = 0.25;
+        let roadPitch = 0;
+
+        if (this.spline) {
+          const roadPt = this.spline.getPointAt(this.trackProgress);
+          const tangent = this.spline.getTangentAt(this.trackProgress).normalize();
+          const distToRoad = this.pos.distanceTo(roadPt);
+
+          // If on road surface (road ribbon half-width is 7.0)
+          if (distToRoad < 9.0) {
+            roadHeight = roadPt.y + 0.25;
+            roadPitch = -Math.atan2(tangent.y, Math.sqrt(tangent.x * tangent.x + tangent.z * tangent.z));
+          } else {
+            roadHeight = 0.25;
+          }
+        }
+
+        // Vertical physics (Jumps, Slopes & Gravity)
         this.pos.y += this.verticalVel * dt;
-        if (this.pos.y > 0.1) {
+        if (this.pos.y > roadHeight + 0.1) {
           this.verticalVel += CONFIG.gravity * dt;
           this.isGrounded = false;
         } else {
-          this.pos.y = 0;
+          this.pos.y = roadHeight;
           this.verticalVel = 0;
           if (!this.isGrounded) {
             // Landed
             this.isGrounded = true;
             if (this.jumpTrickTimer > 0) {
-              this.turboTimer = 1.0;
+              this.turboTimer = 1.2;
               if (this.isPlayer) {
                 audio.playTurboBurst();
                 if (window.gameInstance) window.gameInstance.showAnnouncer('¡ACROBACIA!');
@@ -2590,9 +2616,10 @@
           audio.playTrick();
         }
 
-        // Update 3D Mesh transforms
+        // Update 3D Mesh transforms with road pitch adherence
         this.mesh.position.copy(this.pos);
         this.mesh.rotation.y = this.heading;
+        this.mesh.rotation.x = roadPitch;
 
         // Visual wheel roll and tilt
         const wheelRollSpeed = (this.speed * dt) / 0.26;
@@ -3234,9 +3261,10 @@
         roadMesh.receiveShadow = true;
         this.scene.add(roadMesh);
 
-        // Finish Line Arch & Checker Strip
-        const startPt = this.spline.getPointAt(0);
-        const startTangent = this.spline.getTangentAt(0).normalize();
+        // Finish Line Arch & Checker Strip (Placed at t = 0.08)
+        const finishT = 0.08;
+        const startPt = this.spline.getPointAt(finishT);
+        const startTangent = this.spline.getTangentAt(finishT).normalize();
         const startNormal = new THREE.Vector3().crossVectors(startTangent, new THREE.Vector3(0, 1, 0)).normalize();
 
         const archGeo = new THREE.BoxGeometry(roadWidth + 4, 6, 1.2);
@@ -3493,28 +3521,45 @@
         const availablePilots = PILOTS.filter(p => p.id !== this.playerPilot.id);
         const gridPilots = [this.playerPilot, ...availablePilots.slice(0, 7)];
 
-        const startPt = this.spline.getPointAt(0);
-        const startTangent = this.spline.getTangentAt(0).normalize();
-        const startNormal = new THREE.Vector3().crossVectors(startTangent, new THREE.Vector3(0, 1, 0)).normalize();
-        const startHeading = Math.atan2(startTangent.x, startTangent.z);
-
         gridPilots.forEach((pilot, idx) => {
           const isPlayer = idx === 0;
           const kart = new Kart(pilot, isPlayer, this.scene, this.particles, this.spline);
 
-          // Grid stagger: 2 columns
+          // Grid stagger: 2 columns, safely placed along spline before finish line
           const row = Math.floor(idx / 2);
           const col = idx % 2 === 0 ? -2.8 : 2.8;
-          const spawnPos = startPt.clone()
-            .addScaledVector(startTangent, -10 - (row * 6.0))
-            .addScaledVector(startNormal, col);
-          spawnPos.y = startPt.y + 0.2;
+          const kartT = Math.max(0.005, 0.055 - (row * 0.012));
 
-          kart.setPosition(spawnPos, startHeading);
+          const splinePt = this.spline.getPointAt(kartT);
+          const tangent = this.spline.getTangentAt(kartT).normalize();
+          const normal = new THREE.Vector3().crossVectors(tangent, new THREE.Vector3(0, 1, 0)).normalize();
+          const heading = Math.atan2(tangent.x, tangent.z);
+
+          const spawnPos = splinePt.clone().addScaledVector(normal, col);
+          spawnPos.y = splinePt.y + 0.25;
+
+          kart.setPosition(spawnPos, heading, kartT);
           this.karts.push(kart);
 
           if (isPlayer) this.playerKart = kart;
         });
+
+        // Snap camera immediately behind player kart on top of the road
+        if (this.playerKart) {
+          const heading = this.playerKart.heading;
+          const camDist = 7.5;
+          const camHeight = 3.2;
+          this.camera.position.set(
+            this.playerKart.pos.x - Math.sin(heading) * camDist,
+            this.playerKart.pos.y + camHeight,
+            this.playerKart.pos.z - Math.cos(heading) * camDist
+          );
+          this.camera.lookAt(
+            this.playerKart.pos.x + Math.sin(heading) * 4.0,
+            this.playerKart.pos.y + 1.2,
+            this.playerKart.pos.z + Math.cos(heading) * 4.0
+          );
+        }
 
         // Start Countdown Sequence
         this.countdownState = 3;
@@ -3583,13 +3628,28 @@
           kart.setBattleMode(true);
 
           const ang = (idx / 8) * Math.PI * 2;
-          const pos = new THREE.Vector3(Math.cos(ang) * 45, 0.2, Math.sin(ang) * 45);
+          const pos = new THREE.Vector3(Math.cos(ang) * 45, 0.25, Math.sin(ang) * 45);
           const heading = ang + Math.PI; // Face center
 
-          kart.setPosition(pos, heading);
+          kart.setPosition(pos, heading, 0);
           this.karts.push(kart);
           if (isPlayer) this.playerKart = kart;
         });
+
+        // Snap camera in battle mode too
+        if (this.playerKart) {
+          const heading = this.playerKart.heading;
+          this.camera.position.set(
+            this.playerKart.pos.x - Math.sin(heading) * 7.5,
+            this.playerKart.pos.y + 3.2,
+            this.playerKart.pos.z - Math.cos(heading) * 7.5
+          );
+          this.camera.lookAt(
+            this.playerKart.pos.x + Math.sin(heading) * 4.0,
+            this.playerKart.pos.y + 1.2,
+            this.playerKart.pos.z + Math.cos(heading) * 4.0
+          );
+        }
 
         this.battleTimer = 180;
         this.countdownState = 3;
@@ -4006,6 +4066,14 @@
           const idealCamPos = this.playerKart.pos.clone().add(
             new THREE.Vector3(-Math.sin(targetHeading) * camDist, camHeight, -Math.cos(targetHeading) * camDist)
           );
+
+          // Ensure camera never drops below road elevation
+          if (this.spline) {
+            const roadPt = this.spline.getPointAt(this.playerKart.trackProgress);
+            idealCamPos.y = Math.max(idealCamPos.y, roadPt.y + 2.0);
+          } else {
+            idealCamPos.y = Math.max(idealCamPos.y, 2.0);
+          }
 
           this.camera.position.lerp(idealCamPos, dt * 8.0);
 
