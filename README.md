@@ -63,12 +63,12 @@ Desarrollado en un **único archivo autocontenido** (`index.html`) con **Three.j
 
 ---
 
-## 🌐 Los 4 Circuitos de la Copa Hipervelocidad
+## 🌐 Los 4 Circuitos de Gran Premio Fórmula 1
 
-1. 🌴 **Playa Tropical**: Pista costera bajo el sol, palmeras, puente de madera sobre la bahía y cocos gigantes rodantes como obstáculo dinámico.
-2. ❄️ **Cumbre Nevada**: Carretera de hielo y nieve en alta montaña con curvas rápidas y rocas nevadas rodantes.
-3. 🌋 **Fortaleza Volcánica**: Fuerte de basalto y ríos de magma hirviendo, geysers de fuego y un atajo arriesgado sobre el foso de lava.
-4. 🌆 **Metrópolis Neón**: Autopista flotante nocturna entre rascacielos cibernéticos con arcos hiper-turbo y barreras láser móviles.
+1. 🏎️ **Gran Premio de Silverstone (Costa)**: Templo histórico de alta velocidad con la recta de meta, las enlazadas ultrasuaves de Maggotts-Becketts, la recta Wellington y la legendaria Parabolica.
+2. 🏔️ **Gran Premio de Spa-Francorchamps**: El circuito preferido de los pilotos: subida mítica por Eau Rouge y Raidillon, la larguísima recta de Kemmel a más de 330 km/h, doble Pouhon y la chicane Bus Stop.
+3. 🏁 **Autodromo Nazionale di Monza**: El Templo de la Velocidad italiano: velocidad punta brutal, frenadas salvajes en la Variante del Rettifilo, Curva Grande a fondo, Lesmo 1 & 2, Ascari y la Curva Parabólica.
+4. 🌃 **Gran Premio Marina Bay Nocturno (Singapur)**: Gran Premio urbano bajo 10.000 focos de iluminación nocturna: muros a milímetros, sectores técnicos, el puente Anderson y avenidas de velocidad pura.
 
 ---
 

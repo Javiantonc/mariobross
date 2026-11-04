@@ -1411,165 +1411,248 @@
     ];
 
     /* ==========================================================================
-       4. CIRCUITS & TRACK SPLINE SPECIFICATIONS (4 TRACKS + BATTLE ARENA)
+       4. CIRCUITS & TRACK SPLINE SPECIFICATIONS (4 FORMULA 1 GRAND PRIX CIRCUITS)
        ========================================================================== */
     const TRACKS = [
       {
         id: 'beach',
-        name: 'Playa Tropical',
+        name: 'Gran Premio de Silverstone (Costa)',
         theme: 'tropical',
-        desc: 'Curvas arenosas, palmeras, puente costero y un salto arriesgado sobre la bahía.',
-        thumb: '🌴',
-        bgColor: 0x70c5ff,
-        fogColor: 0x9be0ff,
-        roadColor: 0x4a4f5c,
+        desc: 'Templo histórico: recta principal rápida, enlazadas de alta velocidad Maggotts-Becketts y la mítica Parabolica.',
+        thumb: '🏎️',
+        bgColor: 0x64b8f5,
+        fogColor: 0x90d2fc,
+        roadColor: 0x1e2029,
         curbColor1: 0xffffff,
-        curbColor2: 0xff0044,
-        groundColor: 0xf5d990, // sand
+        curbColor2: 0xdc0000,
+        groundColor: 0x548a3a, // Green runoff grass & sand
         points: [
-          new THREE.Vector3(0, 0, 0),
-          new THREE.Vector3(45, 0, 50),
-          new THREE.Vector3(90, 3, 90),
-          new THREE.Vector3(140, 6, 80),
-          new THREE.Vector3(160, 2, 20),
-          new THREE.Vector3(140, 0, -40),
-          new THREE.Vector3(90, 8, -60), // bridge hump
-          new THREE.Vector3(30, 0, -70),
-          new THREE.Vector3(-40, 0, -60),
-          new THREE.Vector3(-90, 4, -20),
-          new THREE.Vector3(-80, 0, 40),
-          new THREE.Vector3(-35, 0, 30)
+          new THREE.Vector3(0, 0, 0),         // Recta de meta
+          new THREE.Vector3(0, 0, 80),        // Final de recta
+          new THREE.Vector3(25, 0.5, 130),    // Curva 1 Abbey (Rápida a derecha)
+          new THREE.Vector3(65, 0.8, 160),
+          new THREE.Vector3(110, 0.4, 150),   // Curva 2 Farm
+          new THREE.Vector3(145, 0.2, 110),   // Horquilla Village
+          new THREE.Vector3(140, 0.0, 60),    // The Loop
+          new THREE.Vector3(105, 0.0, 30),
+          new THREE.Vector3(80, 0.0, -10),    // Aintree
+          new THREE.Vector3(75, 0.5, -90),    // Recta Wellington (Zona DRS)
+          new THREE.Vector3(75, 0.8, -170),
+          new THREE.Vector3(60, 0.4, -220),   // Brooklands
+          new THREE.Vector3(15, 0.2, -240),   // Luffield (Curva larga)
+          new THREE.Vector3(-45, 0.0, -225),
+          new THREE.Vector3(-90, 0.0, -180),  // Woodcote
+          new THREE.Vector3(-120, 0.3, -120), // Copse (Curva rápida 280 km/h)
+          new THREE.Vector3(-140, 0.5, -50),
+          new THREE.Vector3(-150, 0.8, 20),   // Enlazadas Maggotts
+          new THREE.Vector3(-125, 0.6, 70),   // Becketts
+          new THREE.Vector3(-145, 0.4, 120),  // Chapel
+          new THREE.Vector3(-135, 0.2, 180),  // Hangar Straight
+          new THREE.Vector3(-90, 0.0, 200),   // Stowe Corner
+          new THREE.Vector3(-45, 0.0, 160),   // Vale Chicane
+          new THREE.Vector3(-20, 0.0, 80),    // Club Corner hacia meta
+          new THREE.Vector3(-10, 0.0, 20)
         ],
-        ramps: [{ t: 0.48, height: 4.5 }],
-        shortcuts: [{ startT: 0.22, endT: 0.36, desc: 'Paso por el arrecife' }],
+        ramps: [{ t: 0.52, height: 3.5 }],
+        shortcuts: [{ startT: 0.24, endT: 0.35, desc: 'Paso interior por el piano' }],
         dynamicHazard: 'coconuts'
       },
       {
         id: 'snow',
-        name: 'Cumbre Nevada',
+        name: 'Gran Premio de Spa-Francorchamps',
         theme: 'snow',
-        desc: 'Pistas heladas de gran velocidad, abetos cubiertos de nieve y rocas rodantes.',
-        thumb: '❄️',
-        bgColor: 0x9fbcd9,
-        fogColor: 0xc4d9ec,
-        roadColor: 0x364152,
-        curbColor1: 0x00e5ff,
-        curbColor2: 0xffffff,
-        groundColor: 0xeef5fc, // snow
+        desc: 'El circuito de los pilotos: subida mítica de Eau Rouge & Raidillon, recta de Kemmel y doble curva Pouhon.',
+        thumb: '🏔️',
+        bgColor: 0x82a6cb,
+        fogColor: 0xb4cbe0,
+        roadColor: 0x1c1e26,
+        curbColor1: 0xffea00,
+        curbColor2: 0xdc0000,
+        groundColor: 0x3d4f40, // Alpine forest soil
         points: [
-          new THREE.Vector3(0, 0, 0),
-          new THREE.Vector3(40, 4, 60),
-          new THREE.Vector3(100, 10, 110),
-          new THREE.Vector3(150, 15, 70),
-          new THREE.Vector3(120, 8, 10),
-          new THREE.Vector3(80, 5, -30),
-          new THREE.Vector3(120, 0, -80),
-          new THREE.Vector3(70, -4, -130),
-          new THREE.Vector3(-20, -2, -110),
-          new THREE.Vector3(-70, 4, -60),
-          new THREE.Vector3(-110, 8, 0),
-          new THREE.Vector3(-60, 2, 30)
+          new THREE.Vector3(0, 0, 0),         // Recta de meta
+          new THREE.Vector3(0, 0, 60),
+          new THREE.Vector3(25, 0.2, 90),     // Horquilla La Source
+          new THREE.Vector3(60, -1.0, 110),   // Bajada hacia Eau Rouge
+          new THREE.Vector3(100, -2.5, 90),   // Fondo de Eau Rouge
+          new THREE.Vector3(140, 4.0, 60),    // Raidillon subida empinada
+          new THREE.Vector3(180, 10.0, 20),   // Cima de Raidillon
+          new THREE.Vector3(210, 11.5, -40),  // Recta de Kemmel (DRS)
+          new THREE.Vector3(220, 11.0, -120),
+          new THREE.Vector3(195, 9.0, -180),  // Chicane Les Combes
+          new THREE.Vector3(150, 7.5, -200),  // Malmedy
+          new THREE.Vector3(100, 5.0, -190),  // Horquilla Bruxelles
+          new THREE.Vector3(60, 3.0, -150),
+          new THREE.Vector3(30, 1.5, -100),   // Speaker's Corner
+          new THREE.Vector3(-20, 1.0, -120),  // Doble Pouhon
+          new THREE.Vector3(-70, 0.5, -160),
+          new THREE.Vector3(-120, 0.0, -140), // Stavelot
+          new THREE.Vector3(-150, 0.0, -80),  // Blanchimont (300 km/h)
+          new THREE.Vector3(-130, 0.0, 0),
+          new THREE.Vector3(-80, 0.0, 60),    // Bus Stop Chicane
+          new THREE.Vector3(-30, 0.0, 40),
+          new THREE.Vector3(-10, 0.0, 10)
         ],
-        ramps: [{ t: 0.28, height: 5.5 }],
-        shortcuts: [{ startT: 0.58, endT: 0.72, desc: 'Túnel de hielo' }],
+        ramps: [{ t: 0.35, height: 4.0 }],
+        shortcuts: [{ startT: 0.62, endT: 0.74, desc: 'Trazada interior por Pouhon' }],
         dynamicHazard: 'snowboulders'
       },
       {
         id: 'volcano',
-        name: 'Fortaleza Volcánica',
+        name: 'Autodromo Nazionale di Monza',
         theme: 'volcano',
-        desc: 'Castillo de basalto sobre ríos de magma hirviendo con geysers de fuego.',
-        thumb: '🌋',
-        bgColor: 0x220a05,
-        fogColor: 0x44140a,
-        roadColor: 0x241d24,
-        curbColor1: 0xff4400,
-        curbColor2: 0x222222,
-        groundColor: 0x140c0c, // obsidian/lava
+        desc: 'El Templo de la Velocidad: larguísimas rectas a más de 340 km/h, chicanes brutales y la mítica Parabólica.',
+        thumb: '🏁',
+        bgColor: 0x1f1412,
+        fogColor: 0x3d201a,
+        roadColor: 0x181920,
+        curbColor1: 0xffffff,
+        curbColor2: 0x008833, // Italian Tricolore kerbs
+        groundColor: 0x221a18,
         points: [
-          new THREE.Vector3(0, 0, 0),
-          new THREE.Vector3(60, 5, 40),
-          new THREE.Vector3(110, 12, 100),
-          new THREE.Vector3(160, 8, 60),
-          new THREE.Vector3(130, 2, -20),
-          new THREE.Vector3(80, -2, -70),
-          new THREE.Vector3(30, 6, -110),
-          new THREE.Vector3(-40, 14, -130), // volcanic ridge
-          new THREE.Vector3(-100, 6, -90),
-          new THREE.Vector3(-130, 0, -30),
-          new THREE.Vector3(-90, -4, 20),
-          new THREE.Vector3(-40, -1, 10)
+          new THREE.Vector3(0, 0, 0),         // Recta principal de Monza (400m)
+          new THREE.Vector3(0, 0, 100),
+          new THREE.Vector3(0, 0, 200),
+          new THREE.Vector3(15, 0.2, 250),    // Variante del Rettifilo (Frenada salvaje)
+          new THREE.Vector3(-15, 0.2, 280),
+          new THREE.Vector3(20, 0.5, 330),    // Salida hacia Curva Grande
+          new THREE.Vector3(70, 0.8, 360),    // Curva Grande a fondo
+          new THREE.Vector3(130, 0.5, 340),
+          new THREE.Vector3(180, 0.2, 280),
+          new THREE.Vector3(200, 0.0, 200),   // Variante della Roggia
+          new THREE.Vector3(185, 0.0, 140),
+          new THREE.Vector3(150, 1.0, 80),    // Curva di Lesmo 1
+          new THREE.Vector3(120, 1.2, 20),    // Curva di Lesmo 2
+          new THREE.Vector3(80, 0.5, -50),    // Curva del Serraglio
+          new THREE.Vector3(40, -0.5, -130),  // Bajada bajo el puente
+          new THREE.Vector3(10, 0.0, -200),   // Variante Ascari
+          new THREE.Vector3(-25, 0.0, -240),
+          new THREE.Vector3(-30, 0.2, -180),  // Salida Ascari a la recta opuesta
+          new THREE.Vector3(-30, 0.0, -80),   // Recta opuesta a 330 km/h
+          new THREE.Vector3(-20, 0.5, 0),     // Entrada a la Curva Parabólica
+          new THREE.Vector3(25, 0.8, 40),     // Ápice de la Parabólica
+          new THREE.Vector3(10, 0.2, 10)
         ],
-        ramps: [{ t: 0.55, height: 6.0 }],
-        shortcuts: [{ startT: 0.35, endT: 0.48, desc: 'Salto sobre foso de magma' }],
+        ramps: [{ t: 0.65, height: 4.5 }],
+        shortcuts: [{ startT: 0.40, endT: 0.52, desc: 'Paso rasante por Ascari' }],
         dynamicHazard: 'fireballs'
       },
       {
         id: 'neon',
-        name: 'Metrópolis Neón',
+        name: 'Gran Premio Marina Bay Nocturno',
         theme: 'neon',
-        desc: 'Autopista flotante sobre rascacielos futuristas con arcos de aceleración.',
-        thumb: '🌆',
-        bgColor: 0x050515,
-        fogColor: 0x0d0d2b,
-        roadColor: 0x121424,
-        curbColor1: 0xff00aa,
-        curbColor2: 0x00e5ff,
-        groundColor: 0x050713,
+        desc: 'Carrera nocturna bajo 10.000 focos de luz blanca: muros a milímetros, sectores técnicos y luces de neón.',
+        thumb: '🌃',
+        bgColor: 0x050614,
+        fogColor: 0x0a0c24,
+        roadColor: 0x141622,
+        curbColor1: 0x00e5ff,
+        curbColor2: 0xff0066,
+        groundColor: 0x060712,
         points: [
-          new THREE.Vector3(0, 0, 0),
-          new THREE.Vector3(50, 0, 70),
-          new THREE.Vector3(120, 6, 120),
-          new THREE.Vector3(180, 10, 80),
-          new THREE.Vector3(170, 4, 0),
-          new THREE.Vector3(130, 0, -50),
-          new THREE.Vector3(80, 8, -90),
-          new THREE.Vector3(20, 12, -120),
-          new THREE.Vector3(-50, 6, -100),
-          new THREE.Vector3(-110, 0, -50),
-          new THREE.Vector3(-120, 0, 20),
-          new THREE.Vector3(-60, 0, 30)
+          new THREE.Vector3(0, 0, 0),         // Pit Straight
+          new THREE.Vector3(0, 0, 90),
+          new THREE.Vector3(20, 0.2, 140),    // Turn 1 Sheares
+          new THREE.Vector3(50, 0.2, 160),    // Turn 2
+          new THREE.Vector3(80, 0.0, 140),    // Turn 3
+          new THREE.Vector3(100, 0.0, 90),    // Republic Boulevard
+          new THREE.Vector3(130, 0.2, 40),    // Turn 5
+          new THREE.Vector3(150, 0.4, -20),   // Raffles Boulevard (Aceleración brutal)
+          new THREE.Vector3(160, 0.2, -100),
+          new THREE.Vector3(145, 0.0, -160),  // Turn 7 90-degree left
+          new THREE.Vector3(100, 0.0, -180),  // St Andrew's Road
+          new THREE.Vector3(50, 0.0, -190),   // Turn 9
+          new THREE.Vector3(0, 0.2, -180),    // Singapore Sling
+          new THREE.Vector3(-40, 0.5, -150),  // Anderson Bridge (Paso estrecho)
+          new THREE.Vector3(-70, 0.3, -110),  // Turn 14
+          new THREE.Vector3(-90, 0.0, -60),   // Esplanade Drive
+          new THREE.Vector3(-100, 0.0, 0),    // Turn 18 bajo la tribuna flotante
+          new THREE.Vector3(-80, 0.2, 50),    // Turn 20
+          new THREE.Vector3(-45, 0.0, 70),    // Turn 22-23 enlazadas rápidas
+          new THREE.Vector3(-15, 0.0, 40)
         ],
-        ramps: [{ t: 0.38, height: 5.0 }, { t: 0.82, height: 4.8 }],
-        shortcuts: [{ startT: 0.65, endT: 0.78, desc: 'Vía magnética exprés' }],
+        ramps: [{ t: 0.45, height: 3.8 }],
+        shortcuts: [{ startT: 0.68, endT: 0.79, desc: 'Corte por el túnel marítimo' }],
         dynamicHazard: 'lasers'
       }
     ];
 
     /* ==========================================================================
-       5. PROCEDURAL CANVAS TEXTURES & LOW-POLY ASSET BUILDERS
+       5. REALISTIC FORMULA 1 GRAND PRIX ROAD TEXTURE & ASSET BUILDERS
        ========================================================================== */
-    function createRoadTexture(theme, curbCol1 = '#ffffff', curbCol2 = '#ff0044') {
+    function createRoadTexture(theme, curbCol1 = '#ffffff', curbCol2 = '#d90000') {
       const canvas = document.createElement('canvas');
-      canvas.width = 512;
-      canvas.height = 512;
+      canvas.width = 1024;
+      canvas.height = 1024;
       const ctx = canvas.getContext('2d');
 
-      // Asphalt base
-      ctx.fillStyle = '#262833';
-      ctx.fillRect(0, 0, 512, 512);
+      // High-grade dark competition tarmac
+      ctx.fillStyle = '#1e2129';
+      ctx.fillRect(0, 0, 1024, 1024);
 
-      // Subtle asphalt grain
-      for (let i = 0; i < 4000; i++) {
-        const x = Math.random() * 512;
-        const y = Math.random() * 512;
-        ctx.fillStyle = Math.random() > 0.5 ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.1)';
+      // Fine asphalt aggregate noise
+      for (let i = 0; i < 8000; i++) {
+        const x = Math.random() * 1024;
+        const y = Math.random() * 1024;
+        ctx.fillStyle = Math.random() > 0.5 ? 'rgba(255,255,255,0.025)' : 'rgba(0,0,0,0.06)';
         ctx.fillRect(x, y, 2, 2);
       }
 
-      // Curbs (lateral borders)
-      const curbWidth = 44;
+      // Dark rubber racing line groove (las trazadas de goma oscura de los neumáticos)
+      const grad = ctx.createLinearGradient(0, 0, 1024, 0);
+      grad.addColorStop(0, 'rgba(15, 16, 20, 0.9)');
+      grad.addColorStop(0.3, 'rgba(10, 11, 14, 0.95)'); // Heavy rubber on racing line
+      grad.addColorStop(0.5, 'rgba(28, 31, 38, 0.7)');
+      grad.addColorStop(0.7, 'rgba(10, 11, 14, 0.95)'); // Second tyre track
+      grad.addColorStop(1, 'rgba(15, 16, 20, 0.9)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(80, 0, 864, 1024);
+
+      // White track limit boundary lines (Líneas blancas FIA de límites de pista)
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(72, 0, 12, 1024);
+      ctx.fillRect(1024 - 84, 0, 12, 1024);
+
+      // FIA Kerbs with 3D bevels (Pianos rojo/blanco con relieve estriado)
+      const curbWidth = 68;
       const step = 64;
-      for (let y = 0; y < 512; y += step) {
-        ctx.fillStyle = (Math.floor(y / step) % 2 === 0) ? curbCol1 : curbCol2;
+      for (let y = 0; y < 1024; y += step) {
+        const isAlternate = (Math.floor(y / step) % 2 === 0);
+        ctx.fillStyle = isAlternate ? curbCol1 : curbCol2;
+
+        // Left Kerb
         ctx.fillRect(0, y, curbWidth, step);
-        ctx.fillRect(512 - curbWidth, y, curbWidth, step);
+        // Bevel highlight
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
+        ctx.fillRect(curbWidth - 6, y, 6, step);
+
+        // Right Kerb
+        ctx.fillStyle = isAlternate ? curbCol1 : curbCol2;
+        ctx.fillRect(1024 - curbWidth, y, curbWidth, step);
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.35)';
+        ctx.fillRect(1024 - curbWidth, y, 6, step);
       }
 
-      // Center dashed line
-      ctx.fillStyle = '#ffea00';
-      for (let y = 0; y < 512; y += 64) {
-        ctx.fillRect(253, y + 12, 6, 40);
+      // F1 Starting Grid Slots (Cajones de salida F1 escalonados)
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 6;
+      for (let y = 120; y < 900; y += 220) {
+        // Left Slot
+        ctx.strokeRect(220, y, 220, 110);
+        ctx.fillStyle = '#ffea00'; // Yellow pole line
+        ctx.fillRect(220, y + 106, 220, 8);
+
+        // Right Slot (staggered backwards)
+        ctx.strokeStyle = '#ffffff';
+        ctx.strokeRect(580, y + 100, 220, 110);
+        ctx.fillStyle = '#ffea00';
+        ctx.fillRect(580, y + 206, 220, 8);
+      }
+
+      // Center dashed guide line
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+      for (let y = 0; y < 1024; y += 80) {
+        ctx.fillRect(510, y + 15, 4, 50);
       }
 
       const tex = new THREE.CanvasTexture(canvas);
@@ -2717,39 +2800,39 @@
         this.vel.set(Math.sin(this.heading), 0, Math.cos(this.heading)).multiplyScalar(this.speed);
         this.pos.addScaledVector(this.vel, dt);
 
-        // Track Progress Calculation first so we know local height & slope
+        // High-precision track progress calculation (continuous, zero steps)
         if (this.spline) {
           this.updateTrackProgress();
         }
 
-        // Surface elevation and slope adherence
+        // Realistic F1 road elevation, banking and pitch adherence
         let roadHeight = 0.25;
         let roadPitch = 0;
 
         if (this.spline) {
           const roadPt = this.spline.getPointAt(this.trackProgress);
           const tangent = this.spline.getTangentAt(this.trackProgress).normalize();
-          const distToRoad = this.pos.distanceTo(roadPt);
+          const distToRoad = Math.hypot(this.pos.x - roadPt.x, this.pos.z - roadPt.z);
 
-          // If on road surface (road ribbon half-width is 7.0)
-          if (distToRoad < 9.0) {
+          // If within circuit boundary (track width 16m -> half-width 8.0)
+          if (distToRoad < 9.5) {
             roadHeight = roadPt.y + 0.25;
-            roadPitch = -Math.atan2(tangent.y, Math.sqrt(tangent.x * tangent.x + tangent.z * tangent.z));
+            roadPitch = -Math.atan2(tangent.y, Math.hypot(tangent.x, tangent.z));
           } else {
+            // Off-track runoff
             roadHeight = 0.25;
           }
         }
 
-        // Vertical physics (Jumps, Slopes & Gravity)
-        this.pos.y += this.verticalVel * dt;
-        if (this.pos.y > roadHeight + 0.1) {
-          this.verticalVel += CONFIG.gravity * dt;
-          this.isGrounded = false;
-        } else {
-          this.pos.y = roadHeight;
+        // Smooth F1 suspension spring damping (CERO TROMPICONES)
+        if (this.isGrounded) {
+          this.pos.y = THREE.MathUtils.lerp(this.pos.y, roadHeight, Math.min(dt * 35.0, 1.0));
           this.verticalVel = 0;
-          if (!this.isGrounded) {
-            // Landed
+        } else {
+          this.pos.y += this.verticalVel * dt;
+          if (this.pos.y <= roadHeight) {
+            this.pos.y = roadHeight;
+            this.verticalVel = 0;
             this.isGrounded = true;
             if (this.jumpTrickTimer > 0) {
               this.turboTimer = 1.2;
@@ -2759,6 +2842,8 @@
               }
               this.jumpTrickTimer = 0;
             }
+          } else {
+            this.verticalVel += CONFIG.gravity * dt;
           }
         }
 
@@ -2769,24 +2854,19 @@
           audio.playTrick();
         }
 
-        // Update 3D Mesh transforms with road pitch adherence
+        // Smooth 3D transforms with aerodynamic pitch and roll damping
         this.mesh.position.copy(this.pos);
         this.mesh.rotation.y = this.heading;
-        this.mesh.rotation.x = roadPitch;
+        this.mesh.rotation.x = THREE.MathUtils.lerp(this.mesh.rotation.x, roadPitch, Math.min(dt * 18.0, 1.0));
 
         // Visual wheel roll and tilt
-        const wheelRollSpeed = (this.speed * dt) / 0.26;
+        const wheelRollSpeed = (this.speed * dt) / 0.28;
         this.wheels.forEach(w => w.children[0].rotation.x += wheelRollSpeed);
-        this.mesh.rotation.z = -steer * 0.12 - (this.driftDir * 0.18);
+        this.mesh.rotation.z = -steer * 0.10 - (this.driftDir * 0.15);
 
         // Fall into void / lava -> Drone rescue
         if (this.pos.y < CONFIG.respawnY) {
           this.triggerDroneRescue();
-        }
-
-        // Track Progress Calculation
-        if (this.spline) {
-          this.updateTrackProgress();
         }
 
         // Slipstream accumulation check (behind rivals)
@@ -2848,24 +2928,41 @@
       }
 
       updateTrackProgress() {
-        // Find closest point on spline
-        const samples = 100;
+        if (!this.spline) return;
+
+        // Two-pass sub-millimeter continuous spline projection (cero trompicones)
         let bestT = this.trackProgress;
         let minDist = Infinity;
+        const searchRange = 24;
+        const step = 0.0025; // Fine sample steps
 
-        // Local search around current progress
-        for (let i = -6; i <= 6; i++) {
-          const testT = (this.trackProgress + (i / samples) + 1.0) % 1.0;
+        for (let i = -searchRange; i <= searchRange; i++) {
+          const testT = (this.trackProgress + i * step + 1.0) % 1.0;
           const p = this.spline.getPointAt(testT);
-          const d = p.distanceTo(this.pos);
+          const d = (p.x - this.pos.x) ** 2 + (p.z - this.pos.z) ** 2;
           if (d < minDist) {
             minDist = d;
             bestT = testT;
           }
         }
 
-        // Lap crossing detection
-        if (this.trackProgress > 0.85 && bestT < 0.15) {
+        // Secondary ternary continuous refinement
+        let leftT = (bestT - step + 1.0) % 1.0;
+        let rightT = (bestT + step + 1.0) % 1.0;
+        for (let iter = 0; iter < 4; iter++) {
+          const m1 = (leftT * 2 + rightT) / 3;
+          const m2 = (leftT + rightT * 2) / 3;
+          const p1 = this.spline.getPointAt(m1 % 1.0);
+          const p2 = this.spline.getPointAt(m2 % 1.0);
+          const d1 = (p1.x - this.pos.x) ** 2 + (p1.z - this.pos.z) ** 2;
+          const d2 = (p2.x - this.pos.x) ** 2 + (p2.z - this.pos.z) ** 2;
+          if (d1 < d2) rightT = m2;
+          else leftT = m1;
+        }
+        bestT = ((leftT + rightT) / 2) % 1.0;
+
+        // Lap crossing detection (crossing finish line at 0.08)
+        if (this.trackProgress > 0.85 && bestT < 0.20) {
           this.lap++;
           if (this.isPlayer) {
             if (this.lap === CONFIG.totalLaps) {
@@ -3366,9 +3463,9 @@
         // Build Closed CatmullRomCurve3 Spline
         this.spline = new THREE.CatmullRomCurve3(trackData.points, true, 'catmullrom', 0.2);
 
-        // Generate Road Extruded Mesh with Ribbon Strip
-        const divisions = 240;
-        const roadWidth = 14;
+        // Generate Road Extruded Mesh with Ribbon Strip (Ultra-smooth 600 divisions)
+        const divisions = 600;
+        const roadWidth = 16.0;
         const roadPoints = this.spline.getPoints(divisions);
 
         const roadGeo = new THREE.BufferGeometry();
@@ -3386,12 +3483,12 @@
           // Left vertex
           const leftPt = pt.clone().addScaledVector(normal, -roadWidth / 2);
           positions.push(leftPt.x, leftPt.y + 0.1, leftPt.z);
-          uvs.push(0, t * 40);
+          uvs.push(0, t * 50);
 
           // Right vertex
           const rightPt = pt.clone().addScaledVector(normal, roadWidth / 2);
           positions.push(rightPt.x, rightPt.y + 0.1, rightPt.z);
-          uvs.push(1, t * 40);
+          uvs.push(1, t * 50);
 
           if (i < divisions) {
             const base = i * 2;
@@ -3407,36 +3504,82 @@
 
         const roadMat = new THREE.MeshStandardMaterial({
           map: createRoadTexture(trackData.theme, trackData.curbColor1, trackData.curbColor2),
-          roughness: 0.7,
-          metalness: 0.1
+          roughness: 0.65,
+          metalness: 0.15
         });
         const roadMesh = new THREE.Mesh(roadGeo, roadMat);
         roadMesh.receiveShadow = true;
         this.scene.add(roadMesh);
 
-        // Finish Line Arch & Checker Strip (Placed at t = 0.08)
+        // FIA Formula 1 Start Gantry & 5 Red Lights (Placed at t = 0.08)
         const finishT = 0.08;
         const startPt = this.spline.getPointAt(finishT);
         const startTangent = this.spline.getTangentAt(finishT).normalize();
         const startNormal = new THREE.Vector3().crossVectors(startTangent, new THREE.Vector3(0, 1, 0)).normalize();
 
-        const archGeo = new THREE.BoxGeometry(roadWidth + 4, 6, 1.2);
-        const archMat = new THREE.MeshStandardMaterial({ color: 0x222233, roughness: 0.5 });
+        const archGeo = new THREE.BoxGeometry(roadWidth + 4, 6.5, 1.4);
+        const archMat = new THREE.MeshStandardMaterial({ color: 0x1f222d, roughness: 0.4, metalness: 0.6 });
         const arch = new THREE.Mesh(archGeo, archMat);
-        arch.position.copy(startPt).setY(startPt.y + 3.5);
+        arch.position.copy(startPt).setY(startPt.y + 3.8);
         arch.quaternion.setFromUnitVectors(new THREE.Vector3(1, 0, 0), startNormal);
         this.scene.add(arch);
 
-        // Big Finish Sign
-        const bannerGeo = new THREE.BoxGeometry(roadWidth - 2, 1.6, 0.4);
-        const bannerMat = new THREE.MeshBasicMaterial({ map: createCheckerboardTexture() });
-        const banner = new THREE.Mesh(bannerGeo, bannerMat);
-        banner.position.copy(startPt).setY(startPt.y + 3.8);
-        banner.quaternion.copy(arch.quaternion);
-        this.scene.add(banner);
+        // 5 F1 Red Starting Lights Box
+        const lightBox = new THREE.Mesh(
+          new THREE.BoxGeometry(7.0, 1.4, 0.4),
+          new THREE.MeshStandardMaterial({ color: 0x111115, roughness: 0.8 })
+        );
+        lightBox.position.copy(startPt).setY(startPt.y + 3.8).addScaledVector(startTangent, -0.75);
+        lightBox.quaternion.copy(arch.quaternion);
+        this.scene.add(lightBox);
+
+        // 5 Red LED Lenses
+        for (let li = -2; li <= 2; li++) {
+          const redLed = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.35, 0.35, 0.1, 16),
+            new THREE.MeshBasicMaterial({ color: 0xff0022 })
+          );
+          redLed.rotateX(Math.PI / 2);
+          redLed.position.set(li * 1.3, 0, -0.22);
+          lightBox.add(redLed);
+        }
+
+        // F1 Grandstand (Tribuna de circuito cubierta con público)
+        const standGroup = new THREE.Group();
+        const midStraightPt = this.spline.getPointAt(0.04);
+        const straightTangent = this.spline.getTangentAt(0.04).normalize();
+        const straightNormal = new THREE.Vector3().crossVectors(straightTangent, new THREE.Vector3(0, 1, 0)).normalize();
+
+        // Concrete Seating Tiers
+        const tiersGeo = new THREE.BoxGeometry(60, 5, 14);
+        const tiersMat = new THREE.MeshStandardMaterial({ color: 0x3d4354, roughness: 0.8 });
+        const tiers = new THREE.Mesh(tiersGeo, tiersMat);
+        tiers.position.set(0, 2.5, 0);
+        standGroup.add(tiers);
+
+        // Grandstand Roof Canopy
+        const roofGeo = new THREE.BoxGeometry(64, 0.4, 18);
+        const roofMat = new THREE.MeshStandardMaterial({ color: 0x00e5ff, metalness: 0.6, roughness: 0.2 });
+        const roof = new THREE.Mesh(roofGeo, roofMat);
+        roof.position.set(0, 8.5, 0);
+        standGroup.add(roof);
+
+        // Roof support steel truss pillars
+        for (let pi = -28; pi <= 28; pi += 14) {
+          const pillar = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.2, 0.2, 8.5, 8),
+            new THREE.MeshStandardMaterial({ color: 0xcccccc, metalness: 0.9 })
+          );
+          pillar.position.set(pi, 4.25, 8);
+          standGroup.add(pillar);
+        }
+
+        standGroup.position.copy(midStraightPt).addScaledVector(straightNormal, -22).setY(midStraightPt.y);
+        standGroup.quaternion.setFromUnitVectors(new THREE.Vector3(1, 0, 0), straightTangent);
+        this.scene.add(standGroup);
 
         // Ground Plane Terrain
-        const groundGeo = new THREE.PlaneGeometry(800, 800, 32, 32);
+        const groundGeo = new THREE.PlaneGeometry(1000, 1000, 32, 32);
         groundGeo.rotateX(-Math.PI / 2);
         const groundMat = new THREE.MeshStandardMaterial({
           color: trackData.groundColor,
@@ -4034,7 +4177,9 @@
       animate() {
         requestAnimationFrame(this.animate);
 
-        const dt = CONFIG.fixedDt;
+        if (!this.clock) this.clock = new THREE.Clock();
+        const rawDt = this.clock.getDelta();
+        const dt = THREE.MathUtils.clamp(rawDt, 0.005, 0.033);
 
         if (this.raceActive && !this.isPaused) {
           const ccMult = CONFIG.ccSpeedMultipliers[this.difficulty] || 1.0;
@@ -4209,13 +4354,13 @@
           this.drawMinimap();
         }
 
-        // Camera Follow Mechanics (Smooth 3rd-person spring)
+        // Broadcast F1 Chase Camera (Suave, sin vibraciones)
         if (this.playerKart) {
           const isLookingBack = this.input.keys.rearView;
           const targetHeading = this.playerKart.heading + (isLookingBack ? Math.PI : 0);
 
-          const camDist = 7.5;
-          const camHeight = 3.2;
+          const camDist = 6.8;
+          const camHeight = 2.6;
           const idealCamPos = this.playerKart.pos.clone().add(
             new THREE.Vector3(-Math.sin(targetHeading) * camDist, camHeight, -Math.cos(targetHeading) * camDist)
           );
@@ -4223,21 +4368,21 @@
           // Ensure camera never drops below road elevation
           if (this.spline) {
             const roadPt = this.spline.getPointAt(this.playerKart.trackProgress);
-            idealCamPos.y = Math.max(idealCamPos.y, roadPt.y + 2.0);
+            idealCamPos.y = Math.max(idealCamPos.y, roadPt.y + 1.8);
           } else {
-            idealCamPos.y = Math.max(idealCamPos.y, 2.0);
+            idealCamPos.y = Math.max(idealCamPos.y, 1.8);
           }
 
-          this.camera.position.lerp(idealCamPos, dt * 8.0);
+          this.camera.position.lerp(idealCamPos, Math.min(dt * 10.0, 1.0));
 
           const lookTarget = this.playerKart.pos.clone().add(
-            new THREE.Vector3(Math.sin(targetHeading) * 4.0, 1.2, Math.cos(targetHeading) * 4.0)
+            new THREE.Vector3(Math.sin(targetHeading) * 6.0, 1.0, Math.cos(targetHeading) * 6.0)
           );
           this.camera.lookAt(lookTarget);
 
           // Dynamic FOV widening during turbo boost
           const targetFov = this.playerKart.turboTimer > 0 ? CONFIG.turboFov : CONFIG.fov;
-          this.camera.fov = THREE.MathUtils.lerp(this.camera.fov, targetFov, dt * 5.0);
+          this.camera.fov = THREE.MathUtils.lerp(this.camera.fov, targetFov, Math.min(dt * 6.0, 1.0));
           this.camera.updateProjectionMatrix();
         }
 
