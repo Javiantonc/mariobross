@@ -1,6 +1,6 @@
-# 🏎️ NEO KART GP - HYPER DRIFT ARCADE 🏁
+# 🏎️ NEO F1 GP - FORMULA HYPER DRIFT ARCADE 🏁
 
-**NEO KART GP** es un videojuego de carreras arcade de karts completo, pulido y 100% original, inspirado en la jugabilidad clásica de los grandes referentes del género, pero con su propio universo, personajes, objetos, circuitos y banda sonora procedural.
+**NEO F1 GP** es un videojuego de carreras arcade completo, pulido y 100% original que fusiona la adrenalina de los monoplazas de **Fórmula 1** (alerones gigantes con DRS, halo de protección, pontones aerodinámicos, aleta de tiburón, triángulos de suspensión expuestos, neumáticos slick ultra-anchos y luz de lluvia trasera) con la diversión arcade de objetos, derrapes con chispas de mini-turbo y circuitos temáticos espectaculares.
 
 Desarrollado en un **único archivo autocontenido** (`index.html`) con **Three.js** y sintetizadores de sonido en tiempo real con **Web Audio API**. No requiere servidor, descargas adicionales ni pasos de compilación: solo haz doble clic en `index.html` para jugar en cualquier navegador moderno.
 
